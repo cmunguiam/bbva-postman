@@ -1,0 +1,429 @@
+{
+	"info": {
+		"_postman_id": "4382c59a-e783-45ce-ab9b-cd2e4768d8c3",
+		"name": "AAP-CANAL-BBVA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "13000038-APX",
+			"item": [
+				{
+					"name": "13000038-APX",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "21bf5028-9966-421f-b505-a954f954b09d",
+								"exec": [
+									"postman.setEnvironmentVariable(\"tsec\", responseHeaders.tsec);\r",
+									"\r",
+									"pm.test(\"Test status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n   \"authentication\": {\r\n       \"userID\": \"ZM13038\",\r\n       \"consumerID\": \"13000038\",\r\n       \"authenticationType\": \"04\",\r\n       \"authenticationData\": [\r\n           {\r\n               \"idAuthenticationData\": \"password\",\r\n               \"authenticationData\": [\r\n                   \"ODQ2MTkzMzY5ZDA4\"\r\n               ]\r\n           }\r\n       ]\r\n   },\r\n   \"backendUserRequest\": {\r\n       \"userId\": \"\",\r\n       \"accessCode\": \"\",\r\n       \"dialogId\": \"\"\r\n   }\r\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{urlGt}}:{{portGt}}/TechArchitecture/pe/grantingTicket/V02",
+							"host": [
+								"{{urlGt}}"
+							],
+							"port": "{{portGt}}",
+							"path": [
+								"TechArchitecture",
+								"pe",
+								"grantingTicket",
+								"V02"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SMCPE1710111",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6d945750-3767-41cf-aa15-8de72330184f",
+								"exec": [
+									"var iterationData =  pm.environment.get(\"iterationData\");\r",
+									"\r",
+									"mainTest ();\r",
+									"\r",
+									"if (iterationData && iterationData.length > 0) {\r",
+									"     postman.setNextRequest(\"SMCPE1710111\");\r",
+									"} else {     \r",
+									"     pm.environment.unset(\"testCaseId\");\r",
+									"     pm.environment.unset(\"workflow\");   \r",
+									"     pm.environment.unset(\"customer-id\");\r",
+									"     pm.environment.unset(\"expectedStatus\");    \r",
+									"     pm.environment.unset(\"iterationData\");\r",
+									"     postman.setNextRequest(\"SMCPE1810286\"); \r",
+									"}\r",
+									"\r",
+									"function mainTest (){ \r",
+									" \r",
+									"  var codeResponse = pm.response.code;\r",
+									"\r",
+									"  pm.test(\"Test status code is \" +  pm.environment.get(\"expectedStatus\") , function () {\r",
+									"     pm.expect(codeResponse).to.eql(pm.environment.get(\"expectedStatus\"));\r",
+									"\r",
+									"  });\r",
+									"\r",
+									"  var consumerrequestid = pm.response.headers.get(\"consumerrequestid\");\r",
+									"  console.log(\"Consumerrequestid: \", consumerrequestid);\r",
+									"\r",
+									"\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3ce9e2c9-f657-49e8-894e-0ac0245a5fa7",
+								"exec": [
+									"var iterationData =  pm.environment.get(\"iterationData\");\r",
+									"\r",
+									"if (!iterationData) {\r",
+									"    iterationData = data[\"SMCPE1710111\"];\r",
+									"}\r",
+									"\r",
+									"var currentData = iterationData.shift();\r",
+									"\r",
+									"if(currentData){\r",
+									"  pm.environment.set(\"testCaseId\",     currentData[\"testCaseId\"]);\r",
+									"  pm.environment.set(\"workflow\",       currentData[\"workflow\"]);\r",
+									"  pm.environment.set(\"customer-id\",    currentData[\"customer-id\"]);\r",
+									"  pm.environment.set(\"expectedStatus\", currentData[\"expectedStatus\"]);\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"iterationData\", iterationData);\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							},
+							{
+								"key": "tsec",
+								"type": "text",
+								"value": "{{tsec}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{urlSm}}:{{portSm}}/customers/v0/customers/{{customer-id}}/contact-details",
+							"host": [
+								"{{urlSm}}"
+							],
+							"port": "{{portSm}}",
+							"path": [
+								"customers",
+								"v0",
+								"customers",
+								"{{customer-id}}",
+								"contact-details"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "getAfillatiaon"
+					},
+					"response": []
+				},
+				{
+					"name": "SMCPE1810286",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ea08e411-912f-4419-a16c-131f08937522",
+								"exec": [
+									"var iterationData =  pm.environment.get(\"iterationData\");\r",
+									"\r",
+									"mainTest ();\r",
+									"\r",
+									"if (iterationData && iterationData.length > 0) {    \r",
+									"     postman.setNextRequest(\"SMCPE1810286\");\r",
+									"} else {\r",
+									"     pm.environment.unset(\"testCaseId\");\r",
+									"     pm.environment.unset(\"workflow\");       \r",
+									"     pm.environment.unset(\"product.number\");\r",
+									"     pm.environment.unset(\"expectedStatus\");   \r",
+									"     pm.environment.unset(\"iterationData\");\r",
+									"     postman.setNextRequest(null); \r",
+									"}\r",
+									"\r",
+									"function mainTest (){\r",
+									"\r",
+									"  var codeResponse = pm.response.code;\r",
+									"\r",
+									"  pm.test(\"Test status code is \" +  pm.environment.get(\"expectedStatus\") , function () {\r",
+									"     pm.expect(codeResponse).to.eql(pm.environment.get(\"expectedStatus\"));\r",
+									"\r",
+									"  });\r",
+									"\r",
+									"  var consumerrequestid = pm.response.headers.get(\"consumerrequestid\");\r",
+									"  console.log(\"Consumerrequestid: \", consumerrequestid);\r",
+									"\r",
+									"}\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a2af0612-7ea3-49f3-9edd-3091979095a2",
+								"exec": [
+									"var iterationData =  pm.environment.get(\"iterationData\");\r",
+									"\r",
+									"if (!iterationData) {\r",
+									"    iterationData = data[\"SMCPE1810286\"];\r",
+									"}\r",
+									"\r",
+									"var currentData = iterationData.shift();\r",
+									"\r",
+									"if(currentData){\r",
+									"  pm.environment.set(\"testCaseId\",     currentData[\"testCaseId\"]);\r",
+									"  pm.environment.set(\"workflow\",       currentData[\"workflow\"]);\r",
+									"  pm.environment.set(\"product.number\", currentData[\"product.number\"]);\r",
+									"  pm.environment.set(\"expectedStatus\", currentData[\"expectedStatus\"]);\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"iterationData\", iterationData);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Tsec",
+								"type": "text",
+								"value": "{{tsec}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlSm}}:{{portSm}}/receivers/v1/receivers?product.number={{product.number}}",
+							"host": [
+								"{{urlSm}}"
+							],
+							"port": "{{portSm}}",
+							"path": [
+								"receivers",
+								"v1",
+								"receivers"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "product.number",
+									"value": "{{product.number}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SMCPE1910004",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a70ce108-bda2-4c87-beb4-24ccd07fb065",
+								"exec": [
+									"var iterationData =  pm.environment.get(\"iterationData\");\r",
+									"\r",
+									"mainTest ();\r",
+									"\r",
+									"if (iterationData && iterationData.length > 0) {    \r",
+									"     postman.setNextRequest(\"SMCPE1910004\");\r",
+									"} else {\r",
+									"     pm.environment.unset(\"testCaseId\");\r",
+									"     pm.environment.unset(\"workflow\");       \r",
+									"     pm.environment.unset(\"stream\");\r",
+									"     pm.environment.unset(\"value\");\r",
+									"     pm.environment.unset(\"codecFormat\");\r",
+									"     pm.environment.unset(\"expectedDocument\");   \r",
+									"     pm.environment.unset(\"iterationData\");\r",
+									"     postman.setNextRequest(null); \r",
+									"}\r",
+									"\r",
+									"function mainTest (){\r",
+									"\r",
+									"  var jsonData = pm.response.json();\r",
+									"\r",
+									"  console.log(jsonData);\r",
+									"  \r",
+									"  \r",
+									"  pm.test(\"Test document code is \" +  pm.environment.get(\"expectedDocument\") , function () {\r",
+									"     pm.expect(jsonData.data.hasOwnProperty(\"document\")).to.eql(pm.environment.get(\"expectedDocument\"));\r",
+									"\r",
+									"  });\r",
+									"\r",
+									"  var consumerrequestid = pm.response.headers.get(\"consumerrequestid\");\r",
+									"  console.log(\"Consumerrequestid: \", consumerrequestid);\r",
+									"\r",
+									"}\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c2fc714b-d220-4e70-9502-6a7a41b91822",
+								"exec": [
+									"var iterationData =  pm.environment.get(\"iterationData\");\r",
+									"\r",
+									"if (!iterationData) {\r",
+									"    iterationData = data[\"SMCPE1910004\"];\r",
+									"}\r",
+									"\r",
+									"var currentData = iterationData.shift();\r",
+									"\r",
+									"if(currentData){\r",
+									"  pm.environment.set(\"testCaseId\",       currentData[\"testCaseId\"]);\r",
+									"  pm.environment.set(\"workflow\",         currentData[\"workflow\"]);\r",
+									"  pm.environment.set(\"stream\",           \"\\\"\"+ currentData[\"stream\"]     + \"\\\"\");\r",
+									"  pm.environment.set(\"value\",            \"\\\"\"+ currentData[\"value\"]      +\"\\\"\");\r",
+									"  pm.environment.set(\"codecFormat\",      \"\\\"\"+ currentData[\"codecFormat\"]+\"\\\"\");\r",
+									"  pm.environment.set(\"expectedDocument\", currentData[\"expectedDocument\"]);\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"iterationData\", iterationData);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Tsec",
+								"type": "text",
+								"value": "{{tsec}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stream\":{{stream}},\r\n    \"configurationParams\": [\r\n        {\r\n            \"name\": \"cryptoKey\",\r\n            \"value\": {{value}}\r\n        }\r\n    ],\r\n    \"codecFormat\": {{codecFormat}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlSm}}:{{portSm}}/business-cryptography/v0/crypto-documents",
+							"host": [
+								"{{urlSm}}"
+							],
+							"port": "{{portSm}}",
+							"path": [
+								"business-cryptography",
+								"v0",
+								"crypto-documents"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "13000051-DIGIBIOMETRICOT",
+			"item": [],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

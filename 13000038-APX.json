@@ -1,0 +1,81 @@
+[
+   {
+      "SMCPE1710111":[
+         {  
+		    "testCaseId"    :1,
+			"workflow"      :false,
+            "customer-id"   :"97164691",
+            "expectedStatus":200			
+         },
+         {  
+		    "testCaseId"    :2,
+			"workflow"      :false,
+            "customer-id"   :"971646",
+            "expectedStatus":409
+			
+         },
+         {  
+		    "testCaseId"    :3,
+			"workflow"      :false,
+            "customer-id"   :"9716469344",
+            "expectedStatus":400			
+         }
+      ],
+      
+      "SMCPE1810286":[
+         { 
+		    "testCaseId"    :1,
+			"workflow"      :false,
+            "product.number":"v3Gbkh-7U97xEaCC8qYou9wyXnFKDObp_0DD4GF0ceE",
+            "expectedStatus":200
+         },
+         {
+		   	"testCaseId"    :2,
+			"workflow"      :false,
+            "product.number":"fx9Q1WWACHUm6cHRSMellWZFG6c5-Q0ye8dOBtvSUBQ",
+            "expectedStatus":409
+         },
+         {
+		   	"testCaseId"    :3,
+			"workflow"      :false,
+            "product.number":"pB8pV8vHUGHH_rckUsXCzRHNAUv6xVtWwiMDXc41bj",
+            "expectedStatus":500
+         }
+      ],
+
+      "SMCPE1910004":[
+         { 
+		    "testCaseId"      :1,
+			"workflow"        :false,
+            "stream"          :"4919108221743738",
+            "value"           :"glomo-cardid-do",
+            "codecFormat"     :"PLAIN",           
+            "expectedDocument":true
+         },
+         { 
+		    "testCaseId"      :2,
+			"workflow"        :false,
+            "stream"          :"TlptS00yN1ZvZ3dLSXRBQQ",
+            "value"           :"glomo-cardid-undo",
+            "codecFormat"     :"B64URL",           
+            "expectedDocument":true
+         },
+         { 
+		    "testCaseId"      :3,
+			"workflow"        :false,
+            "stream"          :"4919108221743738",
+            "value"           :"vcas.productnumber.do",
+            "codecFormat"     :"PLAIN",           
+            "expectedDocument":true
+         },
+        { 
+		    "testCaseId"      :4,
+			"workflow"        :false,
+            "stream"          :"v3Gbkh-7U97xEaCC8qYou9wyXnFKDObp_0DD4GF0ceE",
+            "value"           :"vcas.productnumber.undo",
+            "codecFormat"     :"B64URL",           
+            "expectedDocument":true
+         }
+      ]
+   }
+]
